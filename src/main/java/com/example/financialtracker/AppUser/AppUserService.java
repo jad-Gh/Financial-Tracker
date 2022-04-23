@@ -30,10 +30,10 @@ public class AppUserService {
             appUser.setActive(false);
             appUser.setPassword(new BCryptPasswordEncoder().encode(appUser.getPassword()));
             appUserRepository.save(appUser);
-            log.info("User: %s : created successfully",appUser.getFullname());
+            log.info("User: {} : created successfully",appUser.getFullname());
 
         }catch (Exception e){
-            log.error("failed to create user: %s : Error: %e",appUser.getFullname(),e.getMessage());
+            log.error("failed to create user: {} : Error: {}",appUser.getFullname(),e.getMessage());
             throw new RuntimeException(e.getMessage());
         }
     }
@@ -52,7 +52,7 @@ public class AppUserService {
 
             return result;
         }catch(Exception e){
-            log.error("failed to return users : Error: %e",e.getMessage());
+            log.error("failed to return users : Error: {}",e.getMessage());
             throw new RuntimeException(e.getMessage());
         }
     }
@@ -64,9 +64,9 @@ public class AppUserService {
                 appUser.setPassword(new BCryptPasswordEncoder().encode(appUser.getPassword()));
             }
             appUserRepository.save(appUser);
-            log.info("User: %s : updated successfully",appUser.getFullname());
+            log.info("User: {} : updated successfully",appUser.getFullname());
         }catch (Exception e){
-            log.error("failed to update user: %s : Error: %e",appUser.getFullname(),e.getMessage());
+            log.error("failed to update user: {} : Error: {}",appUser.getFullname(),e.getMessage());
             throw new RuntimeException(e.getMessage());
         }
     }
@@ -74,9 +74,9 @@ public class AppUserService {
     public void deleteUser(Long id){
         try{
             appUserRepository.deleteById(id);
-            log.info("Deleted user with ID: %i successfully",id);
+            log.info("Deleted user with ID: {} successfully",id);
         }catch (Exception e){
-            log.error("Failed to delete user: Error: %e",e.getMessage());
+            log.error("Failed to delete user: Error: {}",e.getMessage());
         }
     }
 

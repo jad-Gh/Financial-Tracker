@@ -2,9 +2,9 @@ package com.example.financialtracker.AppUser;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping(path = "/user")
@@ -12,8 +12,27 @@ import org.springframework.web.bind.annotation.RestController;
 public class AppUserController {
     private final AppUserService appUserService;
 
+    @PostMapping()
     public ResponseEntity<String> createUser(@RequestBody AppUser appUser){
         appUserService.createUser(appUser);
         return ResponseEntity.ok().body("User created successfully");
+    }
+
+    @PutMapping
+    public ResponseEntity<String> editUser(@RequestBody AppUser appUser){
+        appUserService.updateUser(appUser);
+        return ResponseEntity.ok().body("User updated successfully");
+    }
+
+    @GetMapping
+    public ResponseEntity<Map<String,Object>> getUsers(@RequestParam(name = "page",defaultValue = "0") int page,
+                                                       @RequestParam(name="size",defaultValue = "10") int size){
+        return ResponseEntity.ok().body(appUserService.getUsers(page,size));
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable(name = "id") Long id){
+        appUserService.deleteUser(id);
+        return ResponseEntity.ok().body("User deleted successfully");
     }
 }

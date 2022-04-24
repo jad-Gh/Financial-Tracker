@@ -57,6 +57,17 @@ public class AppUserService {
         }
     }
 
+    public AppUser getUserByUsername(String username){
+        try{
+            AppUser appUser = appUserRepository.findAppUserByUsername(username);
+            log.info("Username {} was found by security",appUser.getUsername());
+            return appUser;
+        }catch (Exception e){
+            log.error("Username {} was NOT found by security",username);
+            throw new UsernameNotFoundException("Username Not found");
+        }
+    }
+
     public void updateUser(AppUser appUser){
         try {
             AppUser oldUser = appUserRepository.findById(appUser.getId()).orElseThrow(()-> new UsernameNotFoundException("User not found"));

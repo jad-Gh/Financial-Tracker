@@ -12,7 +12,7 @@ import java.util.Map;
 public class AppUserController {
     private final AppUserService appUserService;
 
-    @PostMapping()
+    @PostMapping("/create")
     public ResponseEntity<String> createUser(@RequestBody AppUser appUser){
         appUserService.createUser(appUser);
         return ResponseEntity.ok().body("User created successfully");

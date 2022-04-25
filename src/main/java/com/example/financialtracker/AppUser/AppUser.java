@@ -22,13 +22,13 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true)
     private String username;
 
     @Column(nullable = false)
     private String fullname;
 
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true)
     @Email
     private String email;
 

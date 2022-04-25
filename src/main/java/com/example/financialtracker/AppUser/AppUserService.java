@@ -59,7 +59,7 @@ public class AppUserService {
 
     public AppUser getUserByUsername(String username){
         try{
-            AppUser appUser = appUserRepository.findAppUserByUsername(username);
+            AppUser appUser = appUserRepository.findAppUserByUsername(username).orElseThrow(()->new UsernameNotFoundException("not found"));
             log.info("Username {} was found by security",appUser.getUsername());
             return appUser;
         }catch (Exception e){

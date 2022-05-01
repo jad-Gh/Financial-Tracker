@@ -13,6 +13,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +28,7 @@ import java.util.Map;
 @RestController
 @AllArgsConstructor
 @Slf4j
+@CrossOrigin(value = "*",maxAge = 3600)
 public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;
@@ -34,9 +36,11 @@ public class AuthenticationController {
 
     @PostMapping(path = "/signin")
     public ResponseEntity<Map<String,Object>> handleSignIn(@RequestBody UsernameAndPass usernameAndPass){
+        System.out.println("started with auth");
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(usernameAndPass.getUsername(),usernameAndPass.getPassword())
         );
+        System.out.println("exited auth");
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserDetailsImp user = (UserDetailsImp) authentication.getPrincipal();
         Algorithm algorithm = Algorithm.HMAC256("secret".getBytes(StandardCharsets.UTF_8));
@@ -61,8 +65,8 @@ public class AuthenticationController {
         String authenticationHeader = request.getHeader("Authorization");
         if (authenticationHeader !=null && authenticationHeader.startsWith("Bearer ")){
 
-                String token = authenticationHeader.substring("Bearer".length());
-                Algorithm algorithm = Algorithm.HMAC256("secret".getBytes(StandardCharsets.UTF_8));
+                String token = authenticationHeader.substring("Bearer ".length());
+                Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
                 JWTVerifier verifier = JWT.require(algorithm).build();
                 DecodedJWT decodedJWT = verifier.verify(token);
                 String username = decodedJWT.getSubject();

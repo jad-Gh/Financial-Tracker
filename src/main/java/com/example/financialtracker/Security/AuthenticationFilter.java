@@ -27,8 +27,8 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             String authenticationHeader = request.getHeader("Authorization");
             if (authenticationHeader !=null && authenticationHeader.startsWith("Bearer ")){
                 try{
-                    String token = authenticationHeader.substring("Bearer".length());
-                    Algorithm algorithm = Algorithm.HMAC256("secret".getBytes(StandardCharsets.UTF_8));
+                    String token = authenticationHeader.substring("Bearer ".length());
+                    Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
                     JWTVerifier verifier = JWT.require(algorithm).build();
                     DecodedJWT decodedJWT = verifier.verify(token);
 

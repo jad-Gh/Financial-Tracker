@@ -14,7 +14,7 @@ public class ConfirmationTokenService {
 
     public void createToken(AppUser user){
         ConfirmationToken token = new ConfirmationToken();
-        token.setCreatedAt(LocalDateTime.now());
+        token.setExpiresAt(LocalDateTime.now().plusMinutes(10));
         token.setUuid(UUID.randomUUID().toString());
         token.setUser(user);
 
@@ -30,5 +30,14 @@ public class ConfirmationTokenService {
     public ConfirmationToken findToken(String uuid){
         ConfirmationToken token = confirmationTokenRepository.findByUUID(uuid).orElseThrow(()->new RuntimeException("Token not found"));
         return token;
+    }
+
+    public boolean isTokenNotExpired(ConfirmationToken token){
+        if (token.getExpiresAt().isBefore(LocalDateTime.now())){
+            this.deleteToken(token.getId());
+            return false;
+        } else {
+            return true;
+        }
     }
 }

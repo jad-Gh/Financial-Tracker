@@ -18,7 +18,7 @@ public class ConfirmationToken {
     private Long id;
 
     @Column(updatable = false,nullable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime expiresAt;
 
     @Column(nullable = false)
     private String uuid;

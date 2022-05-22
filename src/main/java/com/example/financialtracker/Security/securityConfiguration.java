@@ -44,7 +44,7 @@ public class securityConfiguration extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(exceptionHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers("/signin","/user/create").permitAll()
+                .antMatchers("/signin","/user/create", "/validate-token/**").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(new AuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

@@ -1,6 +1,7 @@
 package com.example.financialtracker.AppUser;
 
 
+import com.example.financialtracker.ConfirmationToken.ConfirmationToken;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

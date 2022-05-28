@@ -1,5 +1,6 @@
 package com.example.financialtracker.AppUser;
 
+import com.example.financialtracker.RegestrationService.RegestrationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +12,11 @@ import java.util.Map;
 @AllArgsConstructor
 public class AppUserController {
     private final AppUserService appUserService;
+    private final RegestrationService regestrationService;
 
     @PostMapping("/create")
     public ResponseEntity<String> createUser(@RequestBody AppUser appUser){
-        appUserService.createUser(appUser);
+        regestrationService.registerUser(appUser);
         return ResponseEntity.ok().body("User created successfully");
     }
 

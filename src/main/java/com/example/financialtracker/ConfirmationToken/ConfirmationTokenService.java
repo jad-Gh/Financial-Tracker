@@ -12,13 +12,15 @@ import java.util.UUID;
 public class ConfirmationTokenService {
     private final ConfirmationTokenRepository confirmationTokenRepository;
 
-    public void createToken(AppUser user){
+    public ConfirmationToken createToken(AppUser user){
         ConfirmationToken token = new ConfirmationToken();
         token.setExpiresAt(LocalDateTime.now().plusMinutes(10));
         token.setUuid(UUID.randomUUID().toString());
         token.setUser(user);
 
         confirmationTokenRepository.save(token);
+
+        return token;
     }
 
     public void deleteToken(Long id){
@@ -28,7 +30,7 @@ public class ConfirmationTokenService {
     }
 
     public ConfirmationToken findToken(String uuid){
-        ConfirmationToken token = confirmationTokenRepository.findByUUID(uuid).orElseThrow(()->new RuntimeException("Token not found"));
+        ConfirmationToken token = confirmationTokenRepository.findByUuid(uuid).orElseThrow(()->new RuntimeException("Token not found"));
         return token;
     }
 

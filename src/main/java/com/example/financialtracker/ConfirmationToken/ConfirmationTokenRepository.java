@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface ConfirmationTokenRepository extends JpaRepository<ConfirmationToken,Long> {
 
 
-    Optional<ConfirmationToken> findByUUID(String uuid);
+    Optional<ConfirmationToken> findByUuid(String uuid);
 
 
 

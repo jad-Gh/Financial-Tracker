@@ -41,7 +41,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
                     filterChain.doFilter(request,response);
                 }catch (Exception e){
                     log.error("Error validating JWT Token at doFilterInternal: "+ e.getMessage());
-//                    response.sendError(401,"UNAUTHORIZED");
+                    response.sendError(401,"UNAUTHORIZED");
                 }
             }else {
                 filterChain.doFilter(request,response);

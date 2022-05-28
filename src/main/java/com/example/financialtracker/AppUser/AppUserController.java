@@ -37,4 +37,10 @@ public class AppUserController {
         appUserService.deleteUser(id);
         return ResponseEntity.ok().body("User deleted successfully");
     }
+
+    @GetMapping(path="/reset/pass")
+    public ResponseEntity<String> resetPassword(@RequestParam(name="username") String username){
+        regestrationService.resetPassword(username);
+        return ResponseEntity.ok().body("Email to reset password sent successfully");
+    }
 }

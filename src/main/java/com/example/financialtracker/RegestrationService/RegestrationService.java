@@ -21,7 +21,7 @@ public class RegestrationService {
 
         ConfirmationToken token = confirmationTokenService.createToken(user);
 
-        String link = "http://localhost:8080/validate-token/" + token.getUuid();
+        String link = "https://localhost:8443/validate-token/" + token.getUuid();
         emailSender.send(user.getEmail(),buildEmail(user.getFullname(),link));
     }
 
@@ -30,7 +30,7 @@ public class RegestrationService {
 
         ConfirmationToken token = confirmationTokenService.createToken(appUser);
 
-        String link = "http://localhost:8080/validate-token/reset/" + token.getUuid();
+        String link = "https://localhost:8443/validate-token/reset/" + token.getUuid();
         emailSender.send(appUser.getEmail(),buildEmailReset(appUser.getFullname(),link));
 
     }

@@ -37,7 +37,7 @@ public class FinancialRecordService {
 
         financialRecord.setFinancialCategory(category);
 
-        financialRecordRepository.save(recordToUpdate);
+        financialRecordRepository.save(financialRecord);
     }
 
     public void deleteRecord(Long id){

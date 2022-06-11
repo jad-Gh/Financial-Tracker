@@ -31,6 +31,8 @@ public class FinancialRecord {
 
     private String description;
 
+    private String type;
+
     private boolean recurrent;
 
 

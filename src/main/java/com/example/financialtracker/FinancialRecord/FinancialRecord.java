@@ -18,7 +18,6 @@ public class FinancialRecord {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
     @ManyToOne()
     @JoinColumn(name = "financial_category_id")
     @JsonIgnoreProperties(value = "categoryOwner")

@@ -1,5 +1,6 @@
 package com.example.financialtracker.FinancialRecord;
 
+import com.example.financialtracker.FinancialAccount.FinancialAccount;
 import com.example.financialtracker.FinancialCategory.FinancialCategory;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,10 @@ public class FinancialRecord {
     @JoinColumn(name = "financial_category_id")
     @JsonIgnoreProperties(value = "categoryOwner")
     private FinancialCategory financialCategory;
+
+    @ManyToOne()
+    @JoinColumn(name = "account_ref")
+    private FinancialAccount accountRef;
 
     @Column(nullable = false)
     private double value;

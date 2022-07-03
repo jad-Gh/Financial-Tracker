@@ -1,6 +1,7 @@
 package com.example.financialtracker.FinancialCategory;
 
 import com.example.financialtracker.AppUser.AppUser;
+import com.example.financialtracker.FinancialAccount.FinancialAccount;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -2,6 +2,7 @@ package com.example.financialtracker.AppUser;
 
 
 import com.example.financialtracker.ConfirmationToken.ConfirmationToken;
+import com.example.financialtracker.FinancialAccount.FinancialAccount;
 import com.example.financialtracker.FinancialCategory.FinancialCategory;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -53,5 +54,8 @@ public class AppUser {
     @OneToMany(mappedBy = "categoryOwner")
     @JsonIgnoreProperties("categoryOwner")
     private List<FinancialCategory> categoryList;
+
+    @OneToMany(mappedBy = "accountOwner")
+    private List<FinancialAccount> accountList;
 
 }

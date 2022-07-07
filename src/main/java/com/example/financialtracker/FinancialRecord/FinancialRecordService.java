@@ -1,5 +1,7 @@
 package com.example.financialtracker.FinancialRecord;
 
+import com.example.financialtracker.FinancialAccount.FinancialAccount;
+import com.example.financialtracker.FinancialAccount.FinancialAccountRepository;
 import com.example.financialtracker.FinancialCategory.FinancialCategory;
 import com.example.financialtracker.FinancialCategory.FinancialCategoryRepository;
 import com.example.financialtracker.FinancialCategory.FinancialCategoryService;
@@ -15,13 +17,18 @@ import java.util.List;
 public class FinancialRecordService {
     private final FinancialRecordRepository financialRecordRepository;
     private final FinancialCategoryRepository financialCategoryRepository;
+    private final FinancialAccountRepository financialAccountRepository;
 
     public void addRecord(FinancialRecord financialRecord){
 
         FinancialCategory category = financialCategoryRepository.findById(financialRecord.getFinancialCategory().getId())
                 .orElseThrow(()->new UsernameNotFoundException("Category Not found"));
 
+        FinancialAccount account = financialAccountRepository.findById(financialRecord.getAccountRef().getId())
+                .orElseThrow(()->new UsernameNotFoundException("Account Not found"));
+
         financialRecord.setFinancialCategory(category);
+        financialRecord.setAccountRef(account);
         financialRecord.setCreatedAt(LocalDateTime.now());
 
         financialRecordRepository.save(financialRecord);
@@ -35,7 +42,11 @@ public class FinancialRecordService {
         FinancialCategory category = financialCategoryRepository.findById(financialRecord.getFinancialCategory().getId())
                 .orElseThrow(()->new UsernameNotFoundException("Category Not found"));
 
+        FinancialAccount account = financialAccountRepository.findById(financialRecord.getAccountRef().getId())
+                .orElseThrow(()->new UsernameNotFoundException("Account Not found"));
+
         financialRecord.setFinancialCategory(category);
+        financialRecord.setAccountRef(account);
 
         financialRecordRepository.save(financialRecord);
     }

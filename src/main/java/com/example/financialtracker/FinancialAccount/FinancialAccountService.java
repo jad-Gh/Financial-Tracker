@@ -26,11 +26,11 @@ public class FinancialAccountService {
 
     public void addAccount(FinancialAccount account){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        AppUser appUser = appUserRepository.findAppUserByUsername(auth.getName())
-                .orElseThrow(()->new UsernameNotFoundException("User not found"));
+//        AppUser appUser = appUserRepository.findAppUserByUsername(auth.getName())
+//                .orElseThrow(()->new UsernameNotFoundException("User not found"));
 
         account.setCreatedAt(LocalDateTime.now());
-        account.setAccountOwner(appUser);
+//        account.setAccountOwner(appUser);
         account.setBalance(0);
 
         financialAccountRepository.save(account);

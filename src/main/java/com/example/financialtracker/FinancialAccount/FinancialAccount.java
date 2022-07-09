@@ -28,12 +28,12 @@ public class FinancialAccount {
     @Column(updatable = false,nullable = false)
     private LocalDateTime createdAt;
 
-    @ManyToOne()
-    @JoinColumn(name = "account_owner_id")
-    private AppUser accountOwner;
+//    @ManyToOne()
+//    @JoinColumn(name = "account_owner_id")
+//    private AppUser accountOwner;
 
-    @OneToMany(mappedBy = "accounrRef")
-    private List<FinancialRecord> financialRecordList;
+//    @OneToMany(mappedBy = "accountRef")
+//    private List<FinancialRecord> financialRecordList;
 
 
 

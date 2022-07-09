@@ -24,9 +24,9 @@ public class FinancialRecord {
     @JsonIgnoreProperties(value = "categoryOwner")
     private FinancialCategory financialCategory;
 
-    @ManyToOne()
-    @JoinColumn(name = "account_ref")
-    private FinancialAccount accountRef;
+//    @ManyToOne()
+//    @JoinColumn(name = "account_ref")
+//    private FinancialAccount accountRef;
 
     @Column(nullable = false)
     private double value;

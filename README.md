@@ -9,4 +9,13 @@ SSL certificate self-signed using JKS for https functionality on port 8443
 
 Features:
 
-Add Categories (CRUD) 
+Categories (CRUD) 
+
+Records (CRUD)
+
+Accounts (CRUD)
+
+An account can have many records (One to Many)
+A category can have many records (One to Many)
+A user can have many accounts (One to Many)
+A user can create many categories (one to Many)

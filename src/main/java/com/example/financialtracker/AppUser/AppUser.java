@@ -55,7 +55,8 @@ public class AppUser {
     @JsonIgnoreProperties("categoryOwner")
     private List<FinancialCategory> categoryList;
 
-//    @OneToMany(mappedBy = "accountOwner")
-//    private List<FinancialAccount> accountList;
+    @OneToMany(mappedBy = "accountOwner")
+    @JsonIgnoreProperties("accountOwner")
+    private List<FinancialAccount> accountList;
 
 }

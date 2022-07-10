@@ -2,6 +2,7 @@ package com.example.financialtracker.FinancialAccount;
 
 import com.example.financialtracker.AppUser.AppUser;
 import com.example.financialtracker.FinancialRecord.FinancialRecord;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,12 +29,13 @@ public class FinancialAccount {
     @Column(updatable = false,nullable = false)
     private LocalDateTime createdAt;
 
-//    @ManyToOne()
-//    @JoinColumn(name = "account_owner_id")
-//    private AppUser accountOwner;
+    @ManyToOne
+    @JoinColumn(name = "account_owner_id")
+    private AppUser accountOwner;
 
-//    @OneToMany(mappedBy = "accountRef")
-//    private List<FinancialRecord> financialRecordList;
+    @OneToMany(mappedBy = "accountRef")
+    @JsonIgnoreProperties("accountRef")
+    private List<FinancialRecord> financialRecordList;
 
 
 

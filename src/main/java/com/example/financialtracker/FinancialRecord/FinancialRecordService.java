@@ -24,11 +24,11 @@ public class FinancialRecordService {
         FinancialCategory category = financialCategoryRepository.findById(financialRecord.getFinancialCategory().getId())
                 .orElseThrow(()->new UsernameNotFoundException("Category Not found"));
 
-//        FinancialAccount account = financialAccountRepository.findById(financialRecord.getAccountRef().getId())
-//                .orElseThrow(()->new UsernameNotFoundException("Account Not found"));
+        FinancialAccount account = financialAccountRepository.findById(financialRecord.getAccountRef().getId())
+                .orElseThrow(()->new UsernameNotFoundException("Account Not found"));
 
         financialRecord.setFinancialCategory(category);
-//        financialRecord.setAccountRef(account);
+        financialRecord.setAccountRef(account);
         financialRecord.setCreatedAt(LocalDateTime.now());
 
         financialRecordRepository.save(financialRecord);
@@ -42,11 +42,11 @@ public class FinancialRecordService {
         FinancialCategory category = financialCategoryRepository.findById(financialRecord.getFinancialCategory().getId())
                 .orElseThrow(()->new UsernameNotFoundException("Category Not found"));
 
-//        FinancialAccount account = financialAccountRepository.findById(financialRecord.getAccountRef().getId())
-//                .orElseThrow(()->new UsernameNotFoundException("Account Not found"));
+        FinancialAccount account = financialAccountRepository.findById(financialRecord.getAccountRef().getId())
+                .orElseThrow(()->new UsernameNotFoundException("Account Not found"));
 
         financialRecord.setFinancialCategory(category);
-   //     financialRecord.setAccountRef(account);
+        financialRecord.setAccountRef(account);
 
         financialRecordRepository.save(financialRecord);
     }

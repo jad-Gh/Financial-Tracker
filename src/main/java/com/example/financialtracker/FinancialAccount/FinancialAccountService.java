@@ -25,7 +25,10 @@ public class FinancialAccountService {
     public List<FinancialAccount> getAccounts(){
         try{
             log.info("Get Accounts successful");
-            return financialAccountRepository.findAll();
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            AppUser appUser = appUserRepository.findAppUserByUsername(auth.getName())
+                    .orElseThrow(()->new UsernameNotFoundException("User not found"));
+            return appUser.getAccountList();
         }catch(Exception e){
             log.error("Error getting data: " + e.getMessage());
             throw new RuntimeException(e.getLocalizedMessage());

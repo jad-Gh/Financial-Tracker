@@ -5,6 +5,7 @@ import com.example.financialtracker.ConfirmationToken.ConfirmationToken;
 import com.example.financialtracker.FinancialAccount.FinancialAccount;
 import com.example.financialtracker.FinancialCategory.FinancialCategory;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -52,11 +53,11 @@ public class AppUser {
     private boolean active;
 
     @OneToMany(mappedBy = "categoryOwner")
-    @JsonIgnoreProperties("categoryOwner")
+    @JsonIgnore
     private List<FinancialCategory> categoryList;
 
     @OneToMany(mappedBy = "accountOwner")
-    @JsonIgnoreProperties("accountOwner")
+    @JsonIgnore
     private List<FinancialAccount> accountList;
 
 }

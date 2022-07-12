@@ -27,10 +27,13 @@ public class FinancialRecordService {
         FinancialAccount account = financialAccountRepository.findById(financialRecord.getAccountRef().getId())
                 .orElseThrow(()->new UsernameNotFoundException("Account Not found"));
 
+        account.setBalance(financialRecord.getType().equals("Income") ? (account.getBalance()+ financialRecord.getValue()):(account.getBalance() - financialRecord.getValue()));
+
         financialRecord.setFinancialCategory(category);
         financialRecord.setAccountRef(account);
         financialRecord.setCreatedAt(LocalDateTime.now());
 
+        financialAccountRepository.save(account);
         financialRecordRepository.save(financialRecord);
     }
 
@@ -52,6 +55,7 @@ public class FinancialRecordService {
     }
 
     public void deleteRecord(Long id){
+
         financialRecordRepository.deleteById(id);
     }
 

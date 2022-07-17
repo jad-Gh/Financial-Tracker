@@ -56,6 +56,13 @@ public class FinancialRecordService {
 
     public void deleteRecord(Long id){
 
+        FinancialRecord recordToDelete = financialRecordRepository.findById(id)
+                .orElseThrow(()->new UsernameNotFoundException("Record Not found"));
+
+        FinancialAccount account = recordToDelete.getAccountRef();
+        account.setBalance(recordToDelete.getType().equals("Income") ? (account.getBalance() - recordToDelete.getValue()):(account.getBalance() + recordToDelete.getValue()));
+
+        financialAccountRepository.save(account);
         financialRecordRepository.deleteById(id);
     }
 

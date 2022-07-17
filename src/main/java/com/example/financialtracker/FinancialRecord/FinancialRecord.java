@@ -25,7 +25,7 @@ public class FinancialRecord {
     private FinancialCategory financialCategory;
 
     @ManyToOne()
-    @JoinColumn(name = "account_ref")
+    @JoinColumn(name = "account_ref",updatable = false)
     private FinancialAccount accountRef;
 
     @Column(nullable = false)

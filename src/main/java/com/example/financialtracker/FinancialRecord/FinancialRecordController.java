@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(path = "/record")
@@ -16,9 +17,13 @@ public class FinancialRecordController {
     private final FinancialRecordService financialRecordService;
 
     @GetMapping()
-    public ResponseEntity<List<FinancialRecord>> getRecords (){
-        List<FinancialRecord> list = financialRecordService.getRecords();
-        return ResponseEntity.ok().body(list);
+    public ResponseEntity<Map<String,Object>> getRecords (
+            @RequestParam(name = "accountId") Long id,
+            @RequestParam(name="page") int page,
+            @RequestParam(name="size") int size
+    ){
+        Map<String,Object> map = financialRecordService.getRecords(id,page,size);
+        return ResponseEntity.ok().body(map);
     }
 
     @PostMapping()

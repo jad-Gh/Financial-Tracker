@@ -6,11 +6,17 @@ import com.example.financialtracker.FinancialCategory.FinancialCategory;
 import com.example.financialtracker.FinancialCategory.FinancialCategoryRepository;
 import com.example.financialtracker.FinancialCategory.FinancialCategoryService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -67,7 +73,22 @@ public class FinancialRecordService {
         financialRecordRepository.deleteById(id);
     }
 
-    public List<FinancialRecord> getRecords(){
-    return financialRecordRepository.findAll();
+    public Map<String,Object> getRecords(Long id,int page,int size){
+
+        FinancialAccount account = financialAccountRepository.findById(id)
+        .orElseThrow(()->new UsernameNotFoundException("Account Not found"));
+
+        Pageable pageable = PageRequest.of(page,size, Sort.by(Sort.Direction.ASC,"createdAt"));
+        Page<FinancialRecord> result = financialRecordRepository.findAllByAccountRef(account,pageable);
+
+        Map<String,Object> map = new HashMap<>();
+
+        map.put("Page",result.getNumber());
+        map.put("Size of Page",result.getNumberOfElements());
+        map.put("Total Elements",result.getTotalElements());
+        map.put("Total Pages",result.getTotalPages());
+        map.put("Data",result.getContent());
+
+        return map;
     }
 }
